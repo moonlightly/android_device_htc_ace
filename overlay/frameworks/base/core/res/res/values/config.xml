@@ -112,7 +112,7 @@
 
     <!-- Component name of the default wallpaper. This will be ImageWallpaper if not 
          specified -->
-    <string name="default_wallpaper_component">@null</string>
+    <string name="default_wallpaper_component">com.android.phasebeam/.PhaseBeamWallpaper</string>
 
     <!-- Minimum screen brightness allowed by the power manager. -->
     <integer name="config_screenBrightnessDim">31</integer>
