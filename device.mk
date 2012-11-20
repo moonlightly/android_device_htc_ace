@@ -109,7 +109,8 @@ PRODUCT_COPY_FILES += \
     device/htc/ace/idc/elan-touchscreen.idc:system/usr/idc/elan-touchscreen.idc
 
 # Kernel
-    LOCAL_KERNEL := device/htc/ace/prebuilt/kernel/kernel
+ifeq ($(TARGET_PREBUILT_KERNEL),)
+	LOCAL_KERNEL := device/htc/ace/prebuilt/kernel/kernel
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
@@ -118,6 +119,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/htc/ace/prebuilt/kernel/bcmdhd.ko:system/lib/modules/bcmdhd.ko \
     device/htc/ace/prebuilt/kernel/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko
+endif
 
 # Copy bcm4329 firmware
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329/device-bcm.mk)
