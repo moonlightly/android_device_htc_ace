@@ -9,7 +9,10 @@ TARGET_BOOTANIMATION_NAME := 480
 # Inherit CM stuff
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
-PRODUCT_NAME := full_ace
+# Inherit AOSP device configuration for ace
+$(call inherit-product, device/htc/ace/device_ace.mk)
+
+PRODUCT_NAME := cm_ace
 PRODUCT_DEVICE := ace
 PRODUCT_BRAND := htc_wwe
 PRODUCT_MODEL := Desire HD
