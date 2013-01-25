@@ -1,7 +1,7 @@
 #
 # system.prop for ace
 #
-ro.sf.lcd_density=240
+ro.sf.lcd_density=220
 
 #disable system restrictions for all builds
 persist.sys.strictmode.visual=0
