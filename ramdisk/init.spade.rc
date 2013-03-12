@@ -95,6 +95,18 @@ on boot
     chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
     chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
     chmod 0660 /sys/class/rfkill/rfkill0/state
+    chown bluetooth bluetooth /proc/bluetooth/sleep/asleep
+    chown bluetooth bluetooth /proc/bluetooth/sleep/btwake
+    chown bluetooth bluetooth /proc/bluetooth/sleep/btwrite
+    chown bluetooth bluetooth /proc/bluetooth/sleep/hostname
+    chown bluetooth bluetooth /proc/bluetooth/sleep/lpm
+    chown bluetooth bluetooth /proc/bluetooth/sleep/proto
+    chmod 0660 /proc/bluetooth/sleep/asleep
+    chmod 0660 /proc/bluetooth/sleep/btwake
+    chmod 0660 /proc/bluetooth/sleep/btwrite
+    chmod 0660 /proc/bluetooth/sleep/hostname
+    chmod 0660 /proc/bluetooth/sleep/lpm
+    chmod 0660 /proc/bluetooth/sleep/proto
 
     # Bluetooth MAC address path
     chown bluetooth net_bt_stack /sys/module/htc_bdaddress/parameters/bdaddress
@@ -190,6 +202,11 @@ service iprenew_bnep0 /system/bin/dhcpcd -n
     disabled
     oneshot
 
+service qrngd /system/bin/qrngd -f
+    class main
+    user root
+    group root
+
 # Compass and accelerometer daemon
 service akmd /system/bin/akmd
     class late_start
@@ -206,24 +223,6 @@ service bugreport /system/bin/bugmailer.sh -v
 service rmt_storage /system/bin/rmt_storage /dev/block/mmcblk0p13 /dev/block/mmcblk0p14
     class core
     user root
-
-service htc_ebdlogd /system/bin/htc_ebdlogd -s -k -P 7
-    class main
-    user root
-    disabled
-    oneshot
-
-service htc_ebdlogd_rel /system/bin/htc_ebdlogd -s -k
-    class main
-    user root
-    disabled
-    oneshot
-
-on property:ro.build.tags=test-keys
-    start htc_ebdlogd
-
-on property:ro.build.tags=release-keys
-    start htc_ebdlogd_rel
 
 on property:ro.use_data_netmgrd=false
     # netmgr not supported on specific target
